@@ -1,20 +1,31 @@
 @font-face {
   font-family: "Arizona Variable";
-  src: url("FOOTAGE/03_FONTS/ABCArizonaSuperfamilyVariable-Trial.woff") format("woff");
+  src: url("/ABCArizonaSuperfamilyVariable-Trial.woff") format("woff");
   font-display: swap;
 }
 
 h1 {
   font-family: "Arizona Variable";
-  font-variation-settings: "SRFF" 100;
+  font-variation-settings: "SRFF" 100, "wght" 600;
   text-align: center;
   font-size: 100px;
+   z-index: 20;
   color: #5c658a;
+  animation: serifTransition 2s ease-in-out infinite alternate;
+}
+
+@keyframes serifTransition {
+  from {
+    font-variation-settings: "SRFF" 100;
+  }
+  to {
+    font-variation-settings: "SRFF" 0;
+  }
 }
 
 .era1 {
   font-family: "Arizona Variable";
-  font-variation-settings: "SRFF" 100;
+  font-variation-settings: "SRFF" 100, "wght" 400;
   text-align: center;
   font-size: 40px;
   color: #5c658a;
@@ -22,7 +33,7 @@ h1 {
 
 .era2 {
   font-family: "Arizona Variable";
-  font-variation-settings: "SRFF" 50;
+  font-variation-settings: "SRFF" 50, "wght" 400;
   text-align: center;
   font-size: 40px;
   color: #5c658a;
@@ -30,78 +41,82 @@ h1 {
 
 .era3 {
   font-family: "Arizona Variable";
-  font-variation-settings: "SRFF" 0;
+  font-variation-settings: "SRFF" 0, "wght" 400;
   text-align: center;
   font-size: 40px;
   color: #5c658a;
 }
 
-.gradient img{
+.gradient img {
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 }
+
 .post-wrapper {
-  position: relative;  /* Referenzpunkt für die Floater */
-  width: 60%;
+  position: relative;
+  /* Referenzpunkt für die Floater */
+  width: 80%;
   margin: 0 auto;
 }
 
-.insta-post{
+.insta-post {
   margin-top: 50px;
 }
 
-.insta-post img{
+.insta-post img {
   width: 80%;
+  z-index: 1;
 }
 
-.floater1 img{
+.floater1 img {
   width: 80%;
   position: absolute;
   bottom: 4px;
+  z-index: 2;
+
 }
 
-.floater2 img{
+.floater2 img {
   width: 80%;
   position: absolute;
   top: 0px;
   left: 0px;
+  z-index: 4;
 }
-.insta-update-universal {
+
+.insta-update {
+  z-index: 3;
   display: flex;
   justify-content: center;
-  padding: 40px;
+  flex-direction: column;
+  padding: 14px 14px;
   margin: 40px;
   width: 80%;
-  background: radial-gradient(
-  circle at center,
-  #c2df47 0%,
-  #ffffff78 70%
-  
-);
+  background: radial-gradient(circle at center,
+      #c2df47 0%,
+      #ffffff78 70%);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1.5px solid rgba(0,0,0,0.2);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
   text-align: justify;
   border-radius: 14px;
-  padding: 14px 16px;
-  margin: 0 0 20px #c2df47;
-
   position: relative;
 }
 
-.insta-update-header-1 {
+.insta-update-header {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  
+
 }
 
-.insta-update-text-1 {
+.insta-update-text {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100;
   font-size: 18px;
