@@ -48,12 +48,16 @@ h1 {
   margin: 0 auto;
 }
 
+.insta-post{
+  margin-top: 50px;
+}
+
 .insta-post img{
   width: 80%;
 }
 
 .floater1 img{
-  width: 60%;
+  width: 80%;
   position: absolute;
   bottom: 4px;
 }
@@ -65,7 +69,9 @@ h1 {
   left: 0px;
 }
 .insta-update-universal {
-  z-index: 102;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
   margin: 40px;
   width: 80%;
   background: radial-gradient(
