@@ -49,7 +49,7 @@ h1 {
 }
 
 .insta-post img{
-  width: 60%;
+  width: 80%;
 }
 
 .floater1 img{
@@ -59,7 +59,7 @@ h1 {
 }
 
 .floater2 img{
-  width: 60%;
+  width: 80%;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -67,7 +67,7 @@ h1 {
 .insta-update-universal {
   z-index: 102;
   margin: 40px;
-  width: 60%;
+  width: 80%;
   background: radial-gradient(
   circle at center,
   #c2df47 0%,
