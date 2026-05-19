@@ -70,6 +70,7 @@ body::before {
   z-index: 10;
 }
 /* ── QUOTE BLOCK ───────────────────────────────────── */
+
 .quote-block-1 {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100, "wght" 400;
