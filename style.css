@@ -8,7 +8,11 @@ h1 {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100, "wght" 600;
   text-align: center;
-  font-size: 100px;
+  margin-top: 300px;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 300px;
+  font-size: 80px;
    z-index: 20;
   color: #5478ff;
   animation: serifTransition 2s ease-in-out infinite alternate;
@@ -63,24 +67,9 @@ body {
   pointer-events: none;
 }
 
-.side-bar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 30px;
-  height: 100%;
-  background: linear-gradient(-90deg,#f2a3edff, #f2a3ed00) ;
-  z-index: 100;
-  pointer-events: all;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
 
 .side-bar a {
-  color: white;
+  color: rgba(84, 120, 255, 0.8);
   text-decoration: none;
   font-size: 15px;
   line-height: 1;
@@ -95,7 +84,7 @@ body {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100, "wght" 400;
   font-size: 18px;
-  color: #fff;
+  color: #5478ff;
   text-align: left;
   width: 80%;
   margin: 10px auto;
