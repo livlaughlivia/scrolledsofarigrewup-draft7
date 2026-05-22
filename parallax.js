@@ -80,7 +80,7 @@ function initParallax() {
                 scrollTrigger: {
                     trigger: slide,
                     scrub: true,
-                    start: "20% 50%",
+                    start: "20% 30%",
                     end: "bottom top",
                     invalidateOnRefresh: true,
                     markers: true
