@@ -66,7 +66,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(ellipse 100% 110% at 50% 35%,
+  background: radial-gradient(ellipse 100% 105% at 50% 35%,
       #ffffff01 40%,
       #bbe002ff 75%,
       #bbe002ff 110%);
