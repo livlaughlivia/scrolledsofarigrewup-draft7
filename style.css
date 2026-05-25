@@ -175,7 +175,7 @@ body {
 .quote-block-1 {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100, "wght" 400;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 0.3;
   color: #ea3336;
   box-sizing: border-box;
@@ -184,12 +184,34 @@ body {
   margin: 0 auto;
   text-align: center;
   perspective: 500px;
+  
 
 }
 
 .divider {
   display: block;
   margin: 0.5em 0;
+}
+
+.quote-line {
+display: inline;
+position: relavtive;
+  padding: 1px 3px;
+  line-height: 1.5;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  background: #ff9ff2;
+backdrop-filter: blur(7px);
+}
+
+.quote-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ff9ff2;
+  backdrop-filter: blur(7px);
+  -webkit-backgrop-filter: blur(7px);
+  z-index: -1;
 }
 
 
