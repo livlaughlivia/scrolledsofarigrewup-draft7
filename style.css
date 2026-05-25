@@ -135,12 +135,10 @@ body {
    font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 0, "wght" 500;
 }
-
-.side-bar a:hover {
-  transform: scale(1.5);
+.menu-icon {
+  width: 30px;
+  margin: -5px;
 }
-
-
 
 .intro-text {
   font-family: "Arizona Variable";
