@@ -344,6 +344,7 @@ body {
 }
 
 
+
 /* ── Instagram News ───────────────────────────────────── */
 .insta-update {
   z-index: 3;
@@ -480,7 +481,7 @@ body {
 }
 
 .close-headline {
-  width: 30px;
+  width: 20px;
   flex-shrink: 0;
 }
 
@@ -498,7 +499,7 @@ body {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100, "wght" 400;
   color: #5c7fff;
-  font-size: 16px;
+  font-size: 25px;
   flex: 1;
   padding: 0 12px;
 }
@@ -522,7 +523,6 @@ body {
       #afd4ffff 75%,
       #afd4ffff 110%);
   z-index: 999;
-  display: flex;
 }
 
 /* ── Grid Overlay ───────────────────────────────────── */
