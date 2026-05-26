@@ -179,7 +179,6 @@ body {
   line-height: 0.3;
   color: #ea3336;
   box-sizing: border-box;
-  padding: 5%;
   width: 80%;
   margin: 0 auto;
   text-align: center;
@@ -194,24 +193,29 @@ body {
 }
 
 .quote-line {
-display: inline;
-position: relavtive;
-  padding: 1px 3px;
-  line-height: 1.5;
+display: block;
+width: fit-content;
+margin: 0 auto 15px;
+padding: 0px 10px;
+position: relative;
+  line-height: 1;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  background: #ff9ff2;
-backdrop-filter: blur(7px);
-
+    border: none;
+    
+  
 }
 
 .quote-line::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -4px;
   background: #ff9ff2;
-  backdrop-filter: blur(7px);
-  -webkit-backgrop-filter: blur(7px);
+  box-shadow: 
+    0 0 5px 5px #ff9ff250,
+    2px 2px #ff9ff280;
+  border-radius: 50;
+  filter: blur(20px);
 z-index: -1;
 }
 
