@@ -55,8 +55,8 @@ function initDelayed() {
 function initParallax() {
 
     slides.forEach((slide) => {
+        //--- Floater Parallax ---
         const imageWrappers = slide.querySelectorAll('.floater');
-
         imageWrappers.forEach((floater) => {
             const speedAttrY = parseFloat(floater.getAttribute('attr-float-speed-y'));
             const speedY = Number.isFinite(speedAttrY) ? speedAttrY : 0;
@@ -97,7 +97,28 @@ function initParallax() {
                 ease: 'none'
             });
         });
+
+        // ── NEU: insta-post wird beim Scrollen sichtbar ───
+        const instaPost = slide.querySelector('.insta-post');
+        if (instaPost) {
+            gsap.fromTo(instaPost,
+                { autoAlpha: 0 },
+                {
+                    autoAlpha: 1,
+                    scrollTrigger: {
+                        trigger: slide,
+                        scrub: true,
+                        start: "30% 50%",   // später als floater sichtbar
+                        end: "60% 50%",
+                        invalidateOnRefresh: true,
+                        markers: true
+                        },
+                    ease: 'none'
+                }
+            );
+        }
     });
+
 }
 
 

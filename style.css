@@ -230,12 +230,6 @@ z-index: -1;
   position: relative;
 }
 
-.floater1,
-.floater2 {
-  position: absolute;
-  top: 0px;
-}
-
 /* Position links */
 .position1 {
   width: 83.33%;       /* 5 Spalten */
@@ -291,10 +285,19 @@ z-index: -1;
   z-index: 10;
 }
 
+
+.floater1,
+.floater2,
+.floater3 {
+  position: absolute;
+  top: 0px;
+}
+
+
 .floater1 img {
   width: 100%;
   bottom: 4px;
-  z-index: 2;
+  z-index: 3;
 
 }
 
@@ -303,6 +306,25 @@ z-index: -1;
   top: 0px;
   left: 0px;
   z-index: 4;
+}
+.floater3 img {
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 5;
+}
+
+.ig-frame {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.ig-frame img {
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
 }
 
 
