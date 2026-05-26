@@ -7,8 +7,17 @@ let splitIntro, animationIntro, splitQuote;
 const eraQuotes = {
   era1: `
     <span class="quote-line">@Visual-Sun-6018:</span>
-    <span class="quote-line">Honestly I miss how unpolished everything felt...</span>
+    <span class="quote-line">Honestly I miss how unpolished everything felt. Posts didn't have to educate,
+        convert or "add value". People just posted vibes, blurry photos, inside jokes.</span>
     <span class="divider">✦</span>
+    <span class="quote-line">@CharlesIntheWoods:</span>
+      <span class="quote-line">People posted more frequently in 2016, in 2026 people don’t post a soften but consume
+        just as much.</span>
+      <span class="divider">✦</span>
+      <span class="quote-line">@didozer10:</span>
+      <span class="quote-line">Photo dumps were very common a decade ago. People were still chronically online, the only
+        difference is that
+        the influencer craze was just beginning.</span>
   `,
   era2: `
     <span class="quote-line">@CharlesIntheWoods:</span>
@@ -33,11 +42,16 @@ function setupQuotes(era = "era1") {
   const wrapper = document.querySelector(".quote-block-1");
   if (!wrapper) return;
 
-  wrapper.classList.remove("era1", "era2", "era3");
-  wrapper.classList.add(era);
+  wrapper.classList.remove("q-era1", "q-era2", "q-era3");
+  wrapper.classList.add(`q-${era}`);
 
   // 1. CONTENT JE ERA SETZEN
   wrapper.innerHTML = eraQuotes[era];
+
+  // Alle neuen quote-line Spans stylen
+wrapper.querySelectorAll('.quote-line').forEach(span => {
+  span.style.display = 'block';
+});
 
   // 2. SplitText NEU ERSTELLEN
   splitQuote = SplitText.create(".quote-block-1", { type: "lines" });
