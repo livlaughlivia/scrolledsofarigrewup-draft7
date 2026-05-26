@@ -202,6 +202,7 @@ position: relavtive;
   -webkit-box-decoration-break: clone;
   background: #ff9ff2;
 backdrop-filter: blur(7px);
+
 }
 
 .quote-line::before {
@@ -211,7 +212,7 @@ backdrop-filter: blur(7px);
   background: #ff9ff2;
   backdrop-filter: blur(7px);
   -webkit-backgrop-filter: blur(7px);
-  z-index: -1;
+z-index: -1;
 }
 
 
