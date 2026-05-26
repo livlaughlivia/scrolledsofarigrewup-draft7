@@ -2,40 +2,76 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 
 let splitIntro, animationIntro, splitQuote;
 
-function setupQuotes() {
-  splitQuote && splitQuote.revert();
-  ScrollTrigger.getAll().filter(t => t.vars.id?.startsWith("quote-block1")).forEach(t => t.kill());
 
+//--- verschiedene Quotes pro Era ---
+const eraQuotes = {
+  era1: `
+    <span class="quote-line">@Visual-Sun-6018:</span>
+    <span class="quote-line">Honestly I miss how unpolished everything felt...</span>
+    <span class="divider">✦</span>
+  `,
+  era2: `
+    <span class="quote-line">@CharlesIntheWoods:</span>
+    <span class="quote-line">People posted more frequently in 2016...</span>
+    <span class="divider">✦</span>
+  `,
+  era3: `
+    <span class="quote-line">@didozer10:</span>
+    <span class="quote-line">Photo dumps were very common a decade ago...</span>
+  `
+};
+
+let currentEra = "era1";
+
+function setupQuotes(era = "era1") {
+  splitQuote && splitQuote.revert();
+
+  ScrollTrigger.getAll()
+    .filter(t => t.vars.id?.startsWith("quote-block"))
+    .forEach(t => t.kill());
+
+  const wrapper = document.querySelector(".quote-block-1");
+  if (!wrapper) return;
+
+  wrapper.classList.remove("era1", "era2", "era3");
+  wrapper.classList.add(era);
+
+  // 1. CONTENT JE ERA SETZEN
+  wrapper.innerHTML = eraQuotes[era];
+
+  // 2. SplitText NEU ERSTELLEN
   splitQuote = SplitText.create(".quote-block-1", { type: "lines" });
   const lines = splitQuote.lines;
+
   const linesPerPage = 3;
   const totalPages = Math.ceil(lines.length / linesPerPage);
 
-  // Alle Zeilen verstecken
   gsap.set(lines, { opacity: 1, display: "none" });
 
-  // Scroll-Sektionen dynamisch erstellen
-  const wrapper = document.querySelector(".scroll-sections");
-  wrapper.innerHTML = ""; // reset bei resize
+  const scrollWrapper = document.querySelector(".scroll-sections");
+  scrollWrapper.innerHTML = "";
+
   for (let i = 0; i < totalPages; i++) {
     const section = document.createElement("div");
     section.classList.add("scroll-section");
     section.style.minHeight = "100vh";
-    wrapper.appendChild(section);
+    scrollWrapper.appendChild(section);
 
     const pageLines = lines.slice(i * linesPerPage, (i + 1) * linesPerPage);
     const prevLines = i > 0 ? lines.slice((i - 1) * linesPerPage, i * linesPerPage) : [];
     const nextLines = lines.slice((i + 1) * linesPerPage, (i + 2) * linesPerPage);
 
     ScrollTrigger.create({
-      id: `quote-block1${i}`,
+      id: `quote-block-${era}-${i}`,
       trigger: section,
       start: "top center",
+
       onEnter: () => {
         gsap.set(prevLines, { opacity: 0, display: "none" });
         gsap.set(pageLines, { display: "block" });
         gsap.from(pageLines, { opacity: 0, duration: 0.5, stagger: 0.1 });
       },
+
       onEnterBack: () => {
         gsap.set(nextLines, { opacity: 0, display: "none" });
         gsap.set(pageLines, { display: "block" });
@@ -136,7 +172,7 @@ function setup() {
     }
   });
 
-  setupQuotes();
+  setupQuotes("era1"); // Start mit Era 1
   initEraTitles1();
   initEraTitles2();
   initEraTitles3();// NEU — hier einfügen
@@ -153,4 +189,25 @@ document.addEventListener('keydown', (e) => {
     const overlay = document.getElementById('gridOverlay');
     overlay.style.opacity = overlay.style.opacity === '1' ? '0' : '1';
   }
+});
+
+ScrollTrigger.create({
+  trigger: "#era-1",
+  start: "top center",
+  onEnter: () => setupQuotes("era1"),
+  onEnterBack: () => setupQuotes("era1")
+});
+
+ScrollTrigger.create({
+  trigger: "#era-2",
+  start: "top center",
+  onEnter: () => setupQuotes("era2"),
+  onEnterBack: () => setupQuotes("era2")
+});
+
+ScrollTrigger.create({
+  trigger: "#era-3",
+  start: "top center",
+  onEnter: () => setupQuotes("era3"),
+  onEnterBack: () => setupQuotes("era3")
 });
