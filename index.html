@@ -28,20 +28,25 @@
     <div></div>
     <div></div>
   </div>
+  <!--  Loading Screen: noch anpassen für Bilderladen  -->
+  <div class="loading-screen">
+    <svg viewBox="-15 -15 290 290" class="loading-icon">
+      <!-- border bleibt immer sichtbar -->
+      <rect id="icon-border" x="10" y="10" width="238.39" height="238.39" rx="65.94" ry="65.94" fill="none"
+        stroke="#ff0029" stroke-width="30" />
+      <!-- morphing icon — startet als era1 -->
+      <path id="icon-morph"
+        d="M166.24,104.84c16.7,0,30.44,12.24,30.44,30.44,0,16.16-12.36,30.44-30.44,30.44-4.19,0-9.7-1.24-14.1-3.45-6.46-3.24-14.15-1.61-18.19,1.19-4.11,2.85-8.46,7.14-8.46,14.02,0,10.17-8.26,14.02-14.02,14.02-9.14,0-14.02-6.13-14.02-14.02,0-1,.02-1.76.21-3.38.27-2.36-1.5-6.29-4.13-8.38-2.9-2.3-6.09-2.88-8.59-2.12-1.9.58-4.04,1.02-5.74,1.02-11.6,0-17.49-9.68-17.49-17.49,0-5.62,4.48-17.95,17.49-17.49,8.52.3,13.71-4.37,15.8-10.35,2.17-6.2-.64-13.31-4.39-17.03-5.07-5.04-7.22-9.31-7.22-14.75,0-9.45,10.27-20.63,20.63-20.63s17.28,6.96,19.86,15.14c2.09,6.64,5.32,11.24,11.92,15.92,8.49,6.02,14.94,6.89,30.44,6.89Z"
+        fill="#ff0029" stroke="none" />
+      <!-- era2 und era3 nur als Referenz, unsichtbar -->
+      <circle id="icon-era2-ref" cx="129.07" cy="128.98" r="54.69" visibility="hidden" />
+      <rect id="icon-era3-ref" x="81.95" y="81.98" width="94" height="94" visibility="hidden" />
+    </svg>
+  </div>
 
-<div class="loading-screen">
-  <svg viewBox="-15 -15 290 290" class="loading-icon">
-    <!-- border bleibt immer sichtbar -->
-    <rect id="icon-border" x="10" y="10" width="238.39" height="238.39" rx="65.94" ry="65.94" fill="none" stroke="#ff0029" stroke-width="30"/>
-    <!-- morphing icon — startet als era1 -->
-    <path id="icon-morph" d="M166.24,104.84c16.7,0,30.44,12.24,30.44,30.44,0,16.16-12.36,30.44-30.44,30.44-4.19,0-9.7-1.24-14.1-3.45-6.46-3.24-14.15-1.61-18.19,1.19-4.11,2.85-8.46,7.14-8.46,14.02,0,10.17-8.26,14.02-14.02,14.02-9.14,0-14.02-6.13-14.02-14.02,0-1,.02-1.76.21-3.38.27-2.36-1.5-6.29-4.13-8.38-2.9-2.3-6.09-2.88-8.59-2.12-1.9.58-4.04,1.02-5.74,1.02-11.6,0-17.49-9.68-17.49-17.49,0-5.62,4.48-17.95,17.49-17.49,8.52.3,13.71-4.37,15.8-10.35,2.17-6.2-.64-13.31-4.39-17.03-5.07-5.04-7.22-9.31-7.22-14.75,0-9.45,10.27-20.63,20.63-20.63s17.28,6.96,19.86,15.14c2.09,6.64,5.32,11.24,11.92,15.92,8.49,6.02,14.94,6.89,30.44,6.89Z" fill="#ff0029" stroke="none"/>
-    <!-- era2 und era3 nur als Referenz, unsichtbar -->
-    <circle id="icon-era2-ref" cx="129.07" cy="128.98" r="54.69" visibility="hidden"/>
-    <rect id="icon-era3-ref" x="81.95" y="81.98" width="94" height="94" visibility="hidden"/>
-  </svg>
-</div>
 
-  <div class="gradient-overlay"></div>
+
+  <!--  Navigation  -->
   <nav class="side-bar">
     <a>
       <img src="img/SVGs/navigation-icon-16.svg" href="#era-1" class="era1-menu menu-icon1">
@@ -67,42 +72,42 @@
   </nav>
 
   <div class="scroll-sections"></div>
-  <!--  Gen Z Kommentar  -->
-  <!-- Quote -->
+  <!--  Gen Z Kommentare: werden im JS ergänzt!  -->
   <div class="quote-wrapper">
     <div class="quote-block-1" id="quote-content">
       <span class="quote-line">@Visual-Sun-6018:</span>
       <span class="quote-line">Honestly I miss how unpolished everything felt. Posts didn't have to educate,
         convert or "add value". People just posted vibes, blurry photos, inside jokes.</span>
       <span class="divider">✦</span>
-
     </div>
   </div>
 
-  <!-- ── Titel: I scrolled so far I grew up. Hier soll eine Animation stattfinden von "SRFF" 100; zu "SRFF" 0;. Sie soll im Loop unendlich abspielen─────────────── -->
+  <!--── Titel─────────────── -->
+  <section id="title">
+    <div class="title-wrapper">
+      <h1 class="outline title-top" data-text="i scrolled">i scrolled</h1>
+      <img src="img/SVGs/sooo-title.svg" class="title-sooo">
+      <h1 class="outline title-far" data-text="far">far</h1>
+      <h1 class="outline title-bottom" data-text="i grew up">i grew up</h1>
+    </div>
+  </section>
+
+
   <div id="smooth-wrapper">
     <div id="smooth-content">
       <div class="stage">
-        <section id="title">
-          <div class="title-wrapper">
-          <h1 class="outline title-top" data-text="i scrolled">i scrolled</h1>
-          <h1 class="outline title-far" data-text="far">far</h1>
-          <h1 class="outline title-bottom" data-text="i grew up">i grew up</h1>
-          </div>
-        </section>
-        
+
+
 
         <section id="intro">
           <div class="intro-text">
-            <p id="intro-typing">Internet was a place, now it is a moment. Think of the home computer, that was located
-              in the
-              familiy living room. That internet is a place that I and the majority of gen Z never knew. We are digital
-              natives meaning we grew up, when the internet already existed. Still it was fascinating, hypnotizing and
-              idealized, when we first met the Internet. But during the past 10 years a lot of things happened. We grew
-              up and
-              so did the internet. Well sort of at least. And exactly this strange relationship awaits you in the
-              following
-              scrolls.</p>
+            <p id="intro-typing">Das Internet war früher ein Ort. Für Digital Natives wie mich war es nie dieser Ort,
+              sondern immer schon als Moment Teil unseres Alltags. Die ersten Begegnungen damit waren trotzdem
+              besonders. Fast magisch. In den Anfangsjahren wurde ungefiltert, ungestellt geteilt . Ohne Anspruch, ohne
+              Agenda. Wir sind älter geworden, und Social Media ebenfalls: Scroll für Scroll. Zwischen Überforderung,
+              Gewohnheit und echten Momenten der Nähe.
+              Die folgenden Scrolls sind ein Versuch, genau diese Beziehung sichtbar zu machen.
+            </p>
           </div>
         </section>
 
@@ -629,6 +634,7 @@
       </div>
     </div>
   </div>
+  <div class="gradient-overlay"></div>
 
   <script src="main.js"></script>
   <script src="side-navigation.js"></script>

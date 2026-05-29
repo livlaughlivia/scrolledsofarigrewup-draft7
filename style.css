@@ -29,6 +29,8 @@ h1 {
   }
 }
 
+
+
 /* ── LOADING SCREEN ───────────────────────────────────── */
 .loading-screen{
   position: fixed;
@@ -64,7 +66,7 @@ body {
       #ffffff01 40%,
       #bbe002ff 75%,
       #bbe002ff 110%);
-  z-index: 100;
+  z-index: 50;
   pointer-events: none;
 }
 
@@ -72,7 +74,6 @@ body {
 .title-wrapper {
   height: 100svh;
   width: 100%;
-  z-index: 1000;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -84,16 +85,31 @@ body {
 .title-top {
   margin-top: 0;
   align-self: center;
+  position: relative;
+  z-index: 100;
 }
 
 .title-far {
   margin-top: auto;
   align-self: center;
+  position: relative;
+  z-index: 100;
 }
 
 .title-bottom {
-  margin-top: 0;
+  margin-bottom: 0;
   align-self: center;
+  position: relative;
+  z-index: 100;
+}
+.title-sooo {
+align-self: center;
+width: 100%;
+position: relative;
+z-index: 49;
+margin-top: -40px;
+shadow: 0 0 10px #ea3336;
+
 }
 
 .era-title {
@@ -113,7 +129,7 @@ body {
 .outline {
   font-size: 120px;
   position: relative;
-  color: white;
+  color: #f9caf8;
   text-align: center;
 }
 
@@ -133,7 +149,7 @@ body {
   font-variation-settings: "SRFF" 100, "wght" 700;
   text-align: center;
   font-size: 60px;
-  color: #fff;
+  color: #f9caf8;
 }
 
 .era3 {
@@ -141,7 +157,7 @@ body {
   font-variation-settings: "SRFF" 50, "wght" 700;
   text-align: center;
   font-size: 60px;
-  color: #fff;
+  color: #f9caf8;
 }
 
 
@@ -272,10 +288,10 @@ body {
   content: "";
   position: absolute;
   inset: 4px;
-  background: #ff9ff2;
+  background: #f9caf8;
   box-shadow:
-    0 0 5px 5px #ff9ff2ff,
-    2px 2px #ff9ff280;
+    0 0 5px 5px #f9caf8ff,
+    2px 2px #f9caf880;
   border-radius: 50;
   filter: blur(10px);
   z-index: -1;
@@ -404,7 +420,7 @@ body {
   margin: 40px auto;
   width: 300px;
   background: radial-gradient(ellipse 80% 70% at 50% 50%,
-      #ff9ff2 0%,
+      #f9caf8 0%,
       #ffffff00 100%);
   border: 5px solid #ff0029;
   text-align: justify;
@@ -415,7 +431,7 @@ body {
 .insta-update-header1 {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 100;
-  color: #fff;
+  color: #f9caf8;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -437,7 +453,7 @@ body {
 .insta-update-header2 {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 50;
-  color: #fff;
+  color: #f9caf8;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -458,7 +474,7 @@ body {
 .insta-update-header3 {
   font-family: "Arizona Variable";
   font-variation-settings: "SRFF" 0;
-  color: #fff;
+  color: #f9caf8;
   display: flex;
   justify-content: space-between;
   align-items: center;
