@@ -1,36 +1,55 @@
-gsap.registerPlugin(ScrollToPlugin) 
+gsap.registerPlugin(ScrollToPlugin);
 
-// Detect if a link's href goes to the current page
-function getSamePageAnchor (link) {
-  if (
-    link.protocol !== window.location.protocol ||
-    link.host !== window.location.host ||
-    link.pathname !== window.location.pathname ||
-    link.search !== window.location.search
-  ) {
-    return false;
+const sideBar = document.querySelector('.side-bar');
+const links = [...document.querySelectorAll('.side-bar a[href]')];
+let activeLink = null;
+
+// Label-Anzeige oben in der Navbar
+const label = document.createElement('div');
+label.className = 'nav-label';
+sideBar.prepend(label);
+
+function navigateTo(link) {
+  const hash = link.getAttribute('href');
+  const target = hash ? document.querySelector(hash) : null;
+  if (!target) return;
+
+  // Label updaten
+  label.textContent = link.dataset.full || '';
+
+  // Aktiven Link markieren
+  links.forEach(l => l.classList.remove('nav-active'));
+  link.classList.add('nav-active');
+  activeLink = link;
+
+  // Scrollen
+  if (window.smoother) {
+    window.smoother.scrollTo(target, true);
+  } else {
+    gsap.to(window, { scrollTo: target, duration: 1, ease: 'power2.inOut' });
   }
-
-  return link.hash;
 }
 
-// Scroll to a given hash, preventing the event given if there is one
-function scrollToHash(hash, e) {
-  const elem = hash ? document.querySelector(hash) : false;
-  if(elem) {
-    if(e) e.preventDefault();
-    gsap.to(window, {scrollTo: elem});
-  }
-}
-
-// If a link's href is within the current page, scroll to it instead
-document.querySelectorAll('a[href]').forEach(a => {
-  a.addEventListener('click', e => {
-    scrollToHash(getSamePageAnchor(a), e);
+// Click
+links.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    navigateTo(link);
   });
 });
 
-// Scroll to the element in the URL's hash on load
-scrollToHash(window.location.hash);
+// Touch slide — navigiert beim Berühren eines Links
+sideBar.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const touch = e.touches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const link = el?.closest('a[href]');
+  if (link && link !== activeLink) {
+    navigateTo(link);
+  }
+}, { passive: false });
 
-Rerun
+// Label ausblenden wenn kein Touch
+sideBar.addEventListener('touchend', () => {
+  setTimeout(() => { label.textContent = ''; }, 1500);
+});

@@ -247,18 +247,46 @@ body::after {
 }
 
 .menu-icon1 {
-  height: 30px;
-  margin: -5px;
+  height: 70px;
+  margin: -20px;
 }
 
 .menu-icon2 {
-  height: 30px;
-  margin: -5px;
+  height: 60px;
+  margin: -25px;
 }
 
 .menu-icon3 {
-  width: 40px;
-  margin: -5px;
+  width: 60px;
+  margin: -25px;
+}
+
+.nav-label {
+  font-family: "Arizona Variable";
+  font-variation-settings: "SRFF" 0, "wght" 600;
+  font-size: 14px;
+  color: #5478ff;
+  text-align: center;
+  min-height: 20px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  position: absolute;
+  right: 40px;
+  background: #f9caf8;
+  padding: 2px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.side-bar:hover .nav-label,
+.side-bar:focus-within .nav-label {
+  opacity: 1;
+}
+
+.nav-active {
+  font-weight: 700;
+  transform: scale(1.2);
 }
 
 /* ── MARK: INTRO TEXT  */

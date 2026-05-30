@@ -79,7 +79,7 @@ function initParallax() {
                 y: 0,
                 x: 0,
                 scale: 1,
-                filter: `blur(${blurStart}px)` 
+                filter: `blur(${blurStart}px)`
             }, {
                 y: () => speedY + "px",
                 x: () => speedX + "px",
@@ -112,7 +112,7 @@ function initParallax() {
                         end: "60% 50%",
                         invalidateOnRefresh: true,
                         markers: true
-                        },
+                    },
                     ease: 'none'
                 }
             );
@@ -129,12 +129,12 @@ function init() {
         wrapper: '#smooth-wrapper',
         content: '#smooth-content'
     });
+    window.smoother = smoother; // NEU
 
     gsap.set(stage, { autoAlpha: 1 });
     initParallax();
     initDelayed();
     ScrollTrigger.refresh();
-
 }
 
 function initOnFirstScrollIntent() {
