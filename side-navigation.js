@@ -4,18 +4,11 @@ const sideBar = document.querySelector('.side-bar');
 const links = [...document.querySelectorAll('.side-bar a[href]')];
 let activeLink = null;
 
-// Label-Anzeige oben in der Navbar
-const label = document.createElement('div');
-label.className = 'nav-label';
-sideBar.prepend(label);
-
 function navigateTo(link) {
   const hash = link.getAttribute('href');
   const target = hash ? document.querySelector(hash) : null;
   if (!target) return;
 
-  // Label updaten
-  label.textContent = link.dataset.full || '';
 
   // Aktiven Link markieren
   links.forEach(l => l.classList.remove('nav-active'));
@@ -45,11 +38,23 @@ sideBar.addEventListener('touchmove', e => {
   const el = document.elementFromPoint(touch.clientX, touch.clientY);
   const link = el?.closest('a[href]');
   if (link && link !== activeLink) {
+    // Vorheriges zurücksetzen
+    if (activeLink && activeLink.dataset.short) {
+      activeLink.textContent = activeLink.dataset.short;
+    }
+    // Neues expandieren
+    if (link.dataset.full) {
+      link.dataset.short = link.textContent;
+      link.textContent = link.dataset.full;
+    }
     navigateTo(link);
   }
 }, { passive: false });
 
-// Label ausblenden wenn kein Touch
 sideBar.addEventListener('touchend', () => {
-  setTimeout(() => { label.textContent = ''; }, 1500);
+  if (activeLink && activeLink.dataset.short) {
+    setTimeout(() => {
+      activeLink.textContent = activeLink.dataset.short;
+    }, 1500);
+  }
 });
