@@ -68,6 +68,7 @@ body {
       #bbe002ff 110%);
   z-index: 49;
   pointer-events: none;
+  opacity: 0;
 }
 
 /* ── TITLE SCREEN ───────────────────────────────────── */
@@ -96,29 +97,43 @@ body {
   margin-top: 0;
   align-self: center;
   position: relative;
-  z-index: 2;
+  z-index: 100;
 }
 
 .title-far {
-  margin-top: auto;
+  margin-top: -200px;
   align-self: center;
   position: relative;
-  z-index: 2;
+  z-index: 100;
 }
 
 .title-bottom {
-  margin-bottom: 0px;;
+  margin-top: 0px;
   align-self: center;
   position: relative;
-  z-index: 2;
+  z-index: 100;
 }
 .title-sooo {
 align-self: center;
 width: 100%;
+height: 90%;
 position: relative;
 z-index: 1;
 margin-top: -40px;
+}
 
+.title-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse 115% 70% at 50% 45%,
+    #ffffff01 40%,
+    #bbe002ff 75%,
+    #bbe002ff 110%);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .era-title {
