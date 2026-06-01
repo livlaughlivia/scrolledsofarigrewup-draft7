@@ -397,15 +397,53 @@ body::after {
   z-index: -1;
 }
 
-
 /* ── MARK: Insta Post */
 .post-wrapper {
   position: relative;
+  width: 640px;
+  aspect-ratio: 640 / 684;
   /* Referenzpunkt für die Floater */
 }
 
 .insta-post {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+/* Floater: beide mit clip-path auf dasselbe Originalfoto */
+.floater {
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.insta-post img, 
+.floater img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+.ig-frame {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.ig-frame img {
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
 }
 
 /* Position links */
@@ -456,60 +494,6 @@ body::after {
   margin-left: auto;
 }
 
-.insta-post img {
-  width: 100%;
-  z-index: 1;
-}
-
-.floater {
-  z-index: 10;
-}
-
-
-.floater1,
-.floater2,
-.floater3 {
-  position: absolute;
-  top: 0px;
-}
-
-
-.floater1 img {
-  width: 100%;
-  bottom: 4px;
-  z-index: 3;
-
-}
-
-.floater2 img {
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  z-index: 4;
-}
-
-.floater3 img {
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  z-index: 5;
-}
-
-.ig-frame {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-}
-
-.ig-frame img {
-  width: 100%;
-  top: 0px;
-  left: 0px;
-  z-index: 2;
-}
-
-
-
 /* ── MARK: Insta Update */
 .insta-update {
   z-index: 3;
@@ -518,7 +502,6 @@ body::after {
   align-items: center;
   width: 80%;
   margin: 40px auto;
-
 }
 
 .insta-update-content {
