@@ -26,18 +26,22 @@ const SHAPES = {
 const BASE_W = 640.32;
 const BASE_H = 684.64;
 
-function applyClipToElement(el, shapeId) {
+function applyClipToElement(el, shapeId, frameW, frameH) {
     if (!el) return;
     const img = el.querySelector('img');
     if (!img) return;
 
     const uid = Math.random().toString(36).slice(2, 8);
-    const clipId = `clip-${shapeId}-${uid}`;
+    const maskId = `mask-${shapeId}-${uid}`;
+
+    const shapeContent = shapeId === 'shape-17'
+        ? `<g transform="translate(0, ${frameH - BASE_H})">${SHAPES[shapeId]}</g>`
+        : SHAPES[shapeId];
 
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
-    svg.setAttribute('viewBox', `0 0 ${BASE_W} ${BASE_H}`);
+    svg.setAttribute('viewBox', `0 0 ${frameW} ${frameH}`);
     svg.setAttribute('preserveAspectRatio', 'none');
     svg.style.position = 'absolute';
     svg.style.top = '0';
@@ -48,16 +52,17 @@ function applyClipToElement(el, shapeId) {
 
     svg.innerHTML = `
     <defs>
-      <clipPath id="${clipId}" clipPathUnits="userSpaceOnUse">
-        ${SHAPES[shapeId]}
-      </clipPath>
+      <mask id="${maskId}">
+        <rect x="0" y="0" width="${frameW}" height="${frameH}" fill="black"/>
+        <g fill="white">${shapeContent}</g>
+      </mask>
     </defs>
     <image
       href="${img.src}"
       x="0" y="0"
-      width="${BASE_W}" height="${BASE_H}"
+      width="${frameW}" height="${frameH}"
       preserveAspectRatio="xMidYMid slice"
-      clip-path="url(#${clipId})"
+      mask="url(#${maskId})"
     />
   `;
 
@@ -66,12 +71,73 @@ function applyClipToElement(el, shapeId) {
     el._clipSvg = svg.querySelector('image');
 }
 
+function applyInvertedMask(el, shapeIds, frameW, frameH) {
+    if (!el) return;
+    const img = el.querySelector('img');
+    if (!img) return;
+
+    const uid = Math.random().toString(36).slice(2, 8);
+    const maskId = `mask-main-${uid}`;
+    const blackShapes = shapeIds.map(id => {
+        if (id === 'shape-17') {
+            const offsetY = frameH - 684.64;
+            return `<g transform="translate(0, ${offsetY})">${SHAPES[id]}</g>`;
+        }
+        return SHAPES[id];
+    }).join('');
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+    svg.setAttribute('viewBox', `0 0 ${frameW} ${frameH}`);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.overflow = 'visible';
+
+    svg.innerHTML = `
+        <defs>
+          <mask id="${maskId}">
+            <rect x="0" y="0" width="${frameW}" height="${frameH}" fill="white"/>
+            <g fill="black">${blackShapes}</g>
+          </mask>
+        </defs>
+        <image
+          href="${img.src}"
+          x="0" y="0"
+          width="${frameW}" height="${frameH}"
+          preserveAspectRatio="xMidYMid slice"
+          mask="url(#${maskId})"
+        />
+    `;
+
+    img.style.display = 'none';
+    el.appendChild(svg);
+}
+
 function initClipPaths() {
     document.querySelectorAll('.post-wrapper').forEach((wrapper) => {
-        applyClipToElement(wrapper.querySelector('.insta-post:not(.ig-frame)'), 'shape-16');
-        applyClipToElement(wrapper.querySelector('.floater1'), 'shape-18');
-        applyClipToElement(wrapper.querySelector('.floater2'), 'shape-17');
-        applyClipToElement(wrapper.querySelector('.floater3'), 'shape-17');
+        const frameImg = wrapper.querySelector('.ig-frame img');
+        if (!frameImg) return;
+
+        const apply = () => {
+            const w = frameImg.naturalWidth;
+            const h = frameImg.naturalHeight;
+            if (!w || !h) return;
+
+            wrapper.style.aspectRatio = `${w} / ${h}`;
+
+            applyInvertedMask(wrapper.querySelector('.insta-post:not(.ig-frame)'), ['shape-17', 'shape-18'], w, h);
+            applyClipToElement(wrapper.querySelector('.floater1'), 'shape-18', w, h);
+            applyClipToElement(wrapper.querySelector('.floater2'), 'shape-17', w, h);
+            applyClipToElement(wrapper.querySelector('.floater3'), 'shape-17', w, h);
+        };
+
+        if (frameImg.complete && frameImg.naturalWidth) apply();
+        else frameImg.addEventListener('load', apply);
     });
 }
 
@@ -108,7 +174,6 @@ function initParallax() {
     const slides = selectAll(".post-wrapper");
 
     slides.forEach((slide) => {
-        // Floater Parallax
         slide.querySelectorAll('.floater').forEach((floater) => {
             const speedY = Number.isFinite(parseFloat(floater.getAttribute('attr-float-speed-y')))
                 ? parseFloat(floater.getAttribute('attr-float-speed-y')) : 0;
@@ -179,6 +244,12 @@ function init() {
 
     initClipPaths();
     initParallax();
+
+    // Floater nach initParallax zurücksetzen
+    document.querySelectorAll('.floater').forEach(f => {
+        gsap.set(f, { y: 0, x: 0 });
+    });
+
     initDelayed();
     ScrollTrigger.refresh();
 }
