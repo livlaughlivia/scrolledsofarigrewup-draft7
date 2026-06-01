@@ -163,7 +163,6 @@ function initDelayed() {
                 pin: true,
                 pinSpacing: true,
                 invalidateOnRefresh: true,
-                markers: true
             }
         })
             .to(card, { autoAlpha: 1, y: 0, duration: 0.2, ease: 'none' }, 0)
@@ -205,7 +204,6 @@ function initParallax() {
                         start: "20% 30%",
                         end: "bottom top",
                         invalidateOnRefresh: true,
-                        markers: true
                     },
                     immediateRender: false,
                     ease: 'none'
