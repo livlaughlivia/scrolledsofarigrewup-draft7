@@ -14,7 +14,7 @@ const eraQuotes = {
         convert or "add value". People just posted vibes, blurry photos, inside jokes.</span>
     <span class="divider">✦</span>
     <span class="quote-line">@CharlesIntheWoods:</span>
-      <span class="quote-line">People posted more frequently in 2016, in 2026 people don’t post a soften but consume
+      <span class="quote-line">People posted more frequently in 2016, in 2026 people don't post a soften but consume
         just as much.</span>
       <span class="divider">✦</span>
       <span class="quote-line">@didozer10:</span>
@@ -48,15 +48,12 @@ function setupQuotes(era = "era1") {
   wrapper.classList.remove("q-era1", "q-era2", "q-era3");
   wrapper.classList.add(`q-${era}`);
 
-  // 1. CONTENT JE ERA SETZEN
   wrapper.innerHTML = eraQuotes[era];
 
-  // Alle neuen quote-line Spans stylen
   wrapper.querySelectorAll('.quote-line').forEach(span => {
     span.style.display = 'block';
   });
 
-  // 2. SplitText NEU ERSTELLEN
   splitQuote = SplitText.create(".quote-block-1", { type: "lines" });
   const lines = splitQuote.lines;
 
@@ -82,13 +79,11 @@ function setupQuotes(era = "era1") {
       id: `quote-block-${era}-${i}`,
       trigger: section,
       start: "top center",
-
       onEnter: () => {
         gsap.set(prevLines, { opacity: 0, display: "none" });
         gsap.set(pageLines, { display: "block" });
         gsap.from(pageLines, { opacity: 0, duration: 0.5, stagger: 0.1 });
       },
-
       onEnterBack: () => {
         gsap.set(nextLines, { opacity: 0, display: "none" });
         gsap.set(pageLines, { display: "block" });
@@ -98,14 +93,14 @@ function setupQuotes(era = "era1") {
   }
 }
 
-// MARK: Era Title-Animations
+
+// ── MARK: ERA TITLE ANIMATIONS ────────────────────────────────
 function initEraTitles1() {
   ScrollTrigger.getAll()
     .filter(t => t.vars.id?.startsWith("era-title-1"))
     .forEach(t => t.kill());
 
-  const era1Lines = document.querySelectorAll('.era1');
-  era1Lines.forEach((line, i) => {
+  document.querySelectorAll('.era1').forEach((line, i) => {
     gsap.fromTo(line,
       { fontVariationSettings: '"SRFF" 0, "wght" 700' },
       {
@@ -128,8 +123,7 @@ function initEraTitles2() {
     .filter(t => t.vars.id?.startsWith("era-title-2"))
     .forEach(t => t.kill());
 
-  const era2Lines = document.querySelectorAll('.era2');
-  era2Lines.forEach((line, i) => {
+  document.querySelectorAll('.era2').forEach((line, i) => {
     gsap.fromTo(line,
       { fontVariationSettings: '"SRFF" 100, "wght" 700' },
       {
@@ -152,8 +146,7 @@ function initEraTitles3() {
     .filter(t => t.vars.id?.startsWith("era-title-3"))
     .forEach(t => t.kill());
 
-  const era3Lines = document.querySelectorAll('.era3');
-  era3Lines.forEach((line, i) => {
+  document.querySelectorAll('.era3').forEach((line, i) => {
     gsap.fromTo(line,
       { fontVariationSettings: '"SRFF" 50, "wght" 700' },
       {
@@ -171,8 +164,67 @@ function initEraTitles3() {
   });
 }
 
+
+// ── MARK: HEADLINE ────────────────────────────────────────────
+function showHeadline(triggerId) {
+  const trigger = document.getElementById(triggerId);
+  if (!trigger) return;
+
+  document.querySelector('.headline-text-era1').textContent =
+    trigger.dataset.headlineText;
+  document.querySelector('.headline-author1').textContent =
+    trigger.dataset.headlineAuthor;
+  document.querySelector('.headline-context').textContent =
+    trigger.dataset.headlineContext || '';
+
+  gsap.killTweensOf('#headline-timer-line');
+  gsap.set('#headline-timer-line', { drawSVG: '0%' });
+
+  gsap.to('.gradient-headline', {
+    opacity: 1, visibility: 'visible', duration: 0.5,
+    onComplete: () => {
+      document.querySelector('.gradient-headline').style.pointerEvents = 'all';
+    }
+  });
+
+  gsap.fromTo('#headline-timer-line',
+    { drawSVG: '0%' },
+    {
+      drawSVG: '100%', duration: 10, ease: 'none',
+      onComplete: () => {
+        gsap.to('.gradient-headline', {
+          opacity: 0, visibility: 'hidden', duration: 0.5,
+          onComplete: () => {
+            document.querySelector('.gradient-headline').style.pointerEvents = 'none';
+          }
+        });
+      }
+    }
+  );
+}
+
+function hideHeadline() {
+  gsap.killTweensOf('#headline-timer-line');
+  gsap.to('.gradient-headline', { opacity: 0, visibility: 'hidden', duration: 0.3 });
+  document.querySelector('.gradient-headline').style.pointerEvents = 'none';
+}
+
+function initHeadlines() {
+  document.querySelectorAll('[id^="headline-trigger-"]').forEach(triggerEl => {
+    ScrollTrigger.create({
+      trigger: triggerEl,
+      start: "top 80%",
+      onEnter: () => showHeadline(triggerEl.id),
+      onLeave: () => hideHeadline(),
+      onEnterBack: () => showHeadline(triggerEl.id),
+      onLeaveBack: () => hideHeadline()
+    });
+  });
+}
+
+
+// ── MARK: SETUP ───────────────────────────────────────────────
 function setup() {
-  // MARK: Intro Text
   splitIntro && splitIntro.revert();
   animationIntro && animationIntro.revert();
 
@@ -193,11 +245,11 @@ function setup() {
   initEraTitles2();
   initEraTitles3();
 
-  // Quote erst ab era-1
+  // Quotes
   ScrollTrigger.create({
     trigger: "#era-1",
     start: "top 80%",
-    once: true, // nur einmal initialisieren
+    once: true,
     onEnter: () => {
       gsap.set(".quote-wrapper", { opacity: 1, visibility: "visible" });
       setupQuotes("era1");
@@ -207,19 +259,10 @@ function setup() {
   ScrollTrigger.create({
     trigger: "#era-1",
     start: "top 80%",
-    onEnter: () => gsap.to('.side-bar', {
-      opacity: 1,
-      visibility: 'visible',
-      duration: 0.5
-    }),
-    onLeaveBack: () => gsap.to('.side-bar', {
-      opacity: 0,
-      visibility: 'hidden',
-      duration: 0.3
-    })
+    onEnter: () => gsap.to('.side-bar', { opacity: 1, visibility: 'visible', duration: 0.5 }),
+    onLeaveBack: () => gsap.to('.side-bar', { opacity: 0, visibility: 'hidden', duration: 0.3 })
   });
 
-  // Era-Wechsel für Quotes
   ScrollTrigger.create({
     trigger: "#era-2",
     start: "top center",
@@ -234,7 +277,6 @@ function setup() {
     onEnterBack: () => setupQuotes("era3")
   });
 
-  // Zurück zu intro — quotes verstecken
   ScrollTrigger.create({
     trigger: "#era-1",
     start: "top 80%",
@@ -243,70 +285,16 @@ function setup() {
     }
   });
 
-  // MARK: Headline
-  ScrollTrigger.create({
-    trigger: "#headline-trigger-2016",
-    start: "top 80%",
-    onEnter: () => {
-      gsap.to('.gradient-headline', {
-        opacity: 1,
-        visibility: 'visible',
-        duration: 0.5,
-        onComplete: () => {
-          // pointer-events erst nach Animation setzen
-          document.querySelector('.gradient-headline').style.pointerEvents = 'all';
-        }
-      });
-
-      gsap.fromTo('#headline-timer-line',
-        { drawSVG: '0%' },
-        {
-          drawSVG: '100%',
-          duration: 10,
-          ease: 'none',
-          onComplete: () => {
-            gsap.to('.gradient-headline', {
-              opacity: 0,
-              visibility: 'hidden',
-              duration: 0.5,
-              onComplete: () => {
-                document.querySelector('.gradient-headline').style.pointerEvents = 'none';
-              }
-            });
-          }
-        }
-      );
-    },
-
-    onLeave: () => {
-      gsap.to('.gradient-headline', { opacity: 0, visibility: 'hidden', duration: 0.3 });
-      document.querySelector('.gradient-headline').style.pointerEvents = 'none';
-    },
-    onEnterBack: () => {
-      gsap.to('.gradient-headline', { opacity: 1, visibility: 'visible', duration: 0.5 }),
-        document.querySelector('.gradient-headline').style.pointerEvents = 'all';
-      // Linie zurücksetzen und neu starten
-      gsap.fromTo('#headline-timer-line',
-        { drawSVG: '0%' },
-        { drawSVG: '100%', duration: 10, ease: 'none' }
-      );
-    },
-    onLeaveBack: () => {
-      gsap.to('.gradient-headline', { opacity: 0, visibility: 'hidden', duration: 0.3 });
-      document.querySelector('.gradient-headline').style.pointerEvents = 'none';
-    }
-
-  });
-  // Am Ende von setup(), nach allen ScrollTrigger Definitionen
+  // Headlines
+  initHeadlines();
   gsap.set('#headline-timer-line', { drawSVG: '0%' });
 }
 
 
-
+// ── MARK: INIT ────────────────────────────────────────────────
 document.fonts.ready.then(() => {
   setup();
 
-  // Einmalig — nicht in setup() damit es nicht bei resize doppelt angehängt wird
   const closeBtn = document.querySelector('.close-headline-btn');
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
@@ -322,7 +310,6 @@ document.fonts.ready.then(() => {
   } else {
     console.error('close-headline-btn nicht gefunden');
   }
-
 });
 
 window.addEventListener("resize", setup);
